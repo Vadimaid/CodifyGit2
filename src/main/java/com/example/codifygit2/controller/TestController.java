@@ -26,4 +26,7 @@ public class TestController {
        return "Hello " + name;
     }
 
+    private void test() {
+        System.out.println("test");
+    }
 }
