@@ -27,6 +27,10 @@ public class TestController {
     }
 
     private void test() {
+        System.out.println(this.getClass());
+    }
+
+    private void test2() {
         System.out.println("test");
     }
 }
