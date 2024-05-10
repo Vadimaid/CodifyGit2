@@ -7,14 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class TestControllerTest {
+class HelloControllerTest {
 
     @LocalServerPort
     private int port;
@@ -23,11 +23,14 @@ class TestControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void testSayHello_OK() throws Exception {
-        mockMvc.perform(get("http://localhost:" + this.port + "/api/test-1")
+    void testHelloForMe_OK() throws Exception {
+        String name = "Kostya";
+        String result = "Hello " + name + "!";
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:" + this.port + "/api/hello-for-me")
+                        .param("name", name)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value("Hello world"));
+                .andExpect(jsonPath("$").value(result));
     }
-
 }
