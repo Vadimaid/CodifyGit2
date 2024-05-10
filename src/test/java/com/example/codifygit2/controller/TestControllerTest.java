@@ -1,5 +1,6 @@
 package com.example.codifygit2.controller;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,6 +29,15 @@ class TestControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value("Hello world"));
+    }
+    @Test
+    void difference() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:" + this.port + "/api/test-2")
+                .param("a","20")
+                .param("b","5")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value("15"));
     }
 
 }
