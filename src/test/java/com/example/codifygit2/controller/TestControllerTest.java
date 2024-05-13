@@ -30,4 +30,13 @@ class TestControllerTest {
                 .andExpect(jsonPath("$").value("Hello world"));
     }
 
+    @Test
+    void testMult_OK() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:" + this.port + "/api/mult")
+                .param("a","5")
+                .param("b","2"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value("10"));
+    }
+
 }
